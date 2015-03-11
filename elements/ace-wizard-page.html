@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="ace-wizard-page" attributes="description setVisibility">
+  
+  <template>
+    
+    <div style="display:{{visible ? 'block' : 'none'}}">
+      <content></content>
+    </div>
+    
+  </template>
+  
+  <script>
+    Polymer({
+      
+      description: "",
+      
+      visible: false,
+      
+      setVisibility: function(vis) {
+        this.visible = vis;
+      }
+      
+    });
+  </script>
+</polymer-element>

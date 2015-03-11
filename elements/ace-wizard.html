@@ -1,0 +1,106 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+
+<polymer-element name="ace-wizard">
+  
+  <template>
+    
+    <style>
+      
+      .panel {
+        border-radius: 0px;
+        padding: 10px;
+        height: 400px;
+        width: 300px;
+        background-color: LightGrey
+      }
+      
+      core-toolbar {
+        background-color: Grey;
+      }
+
+      .header {
+        font: 16px arial, serif;
+        margin-top: 4px;
+        margin-bottom: 4px;
+      }
+      
+      .contents {
+        color: black;
+        font: 16px arial, serif;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      
+    </style>
+    
+    <div vertical layout class="panel">
+      
+      <core-toolbar>
+        <core-icon-button icon="menu" on-tap="{{menuAction}}"></core-icon-button>
+        <div flex>{{header}}</div>
+      </core-toolbar>
+      
+      <div flex class="contents">
+        <content></content>
+      </div>
+      
+      <div>
+        <div horizontal layout>
+          <div>
+            <paper-button on-click="{{back}}">
+              <core-icon icon="arrow-back"></core-icon>
+              Back
+            </paper-button>
+          </div>
+          <div flex></div>
+          <div>
+            <paper-button on-click="{{next}}">
+              Next
+              <core-icon icon="arrow-forward"></core-icon>
+            </paper-button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+  </template>
+  
+  <script>
+    Polymer({
+
+      currentPageIndex: 0,
+      
+      header: '',
+      
+      domReady: function() {
+        this.setCurrentPage(0);
+      },
+      
+      next: function() {
+        console.log('next clicked');
+        this.setCurrentPage(this.currentPageIndex+1);
+      },
+      
+      back: function() {
+        this.setCurrentPage(this.currentPageIndex-1);
+      },
+      
+      setCurrentPage: function(nextIndex) {
+        var currentPage = this.children[this.currentPageIndex];
+        currentPage.setVisibility(false);
+        this.currentPageIndex = nextIndex;
+        var nextPage = this.children[nextIndex];
+        nextPage.setVisibility(true);
+        this.header = nextPage.description;
+      }
+      
+    });
+  </script>
+  
+</polymer-element>
