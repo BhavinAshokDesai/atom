@@ -1,0 +1,50 @@
+{
+    "version": "1.0",
+    "description": "This problem deals with fluid flow and heat transfer in a pipe elbow geometry.",
+    "inputFiles": {
+        "elbow.msh": {
+            "location": "/Data/Shared Data"
+        }
+    },
+    "meshing": {
+        "resolution": "low",
+        "technique": "tet"
+    },
+    "energy": {
+        "enabled": true
+    },
+    "time": "steady",
+    "viscousModel": "turbulent",
+    "turbulenceModel": "ske",
+    "boundaries": {
+        "inlet.1": {
+            "type": "velocityInlet",
+            "velocityInlet": {
+                "speed": 5.0,
+                "staticTemperature": 300.0
+            }
+        },
+        "outlet.1": {
+            "type": "pressureOutlet",
+            "pressureOutlet": {
+                "staticPresure": 0.0
+            }
+        },
+        "wall.1": {
+            "type": "wall",
+            "wall": {
+                "staticTemperature": 350.0
+            }
+        }
+    },
+    "regions": {
+        "fluid.1": {
+            "type": "fluid",
+            "material": "water"
+        }
+    },
+    "solution": {
+        "solver": "fluent",
+        "accuracy": "firstOrder"
+    }
+}
